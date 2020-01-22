@@ -1,23 +1,27 @@
 # TO-DO: complete the helpe function below to merge 2 sorted arrays
 def merge( arrA, arrB ):
     elements = len( arrA ) + len( arrB )
-    merged_arr = [0] * elements
+    merged_arr = [None] * elements
     # TO-DO
-    arr = arrA + arrB
-    # loop through n-1 elements
-    for i in range(0, len(arr) - 1):
-        cur_index = i
-        smallest_index = cur_index
-        # TO-DO: find next smallest element
-        # (hint, can do in 3 lines of code) 
-        for j in range(i, len(arr)):
-            if arr[j] < arr[smallest_index]:
-                smallest_index = j
-        # TODO: swap
-        arr[cur_index], arr[smallest_index] = arr[smallest_index], arr[cur_index]
+    # indexes
+    a = 0
+    b = 0
+    for i in range(elements):
+        if a >= len(arrA): # if there are no more elements in left side 
+            merged_arr[i] = arrB[b] # merge from the right side
+            b +=1 #increment index for right side
+        elif b >= len(arrB): #if no elements in right side
+            merged_arr[i] = arrA[a] #merge from the left side
+            a += 1 #increment index for left side
+        elif arrA[a] < arrB[b]: #check first element of each list to see which one is greater
+            merged_arr[i] = arrA[a]
+            a += 1
+        else: 
+            merged_arr[i] = arrB[b]
+            b += 1
+    print('\n Merged list',merged_arr)
 
-
-    return arr
+    return merged_arr
 
 
 # TO-DO: implement the Merge Sort function below USING RECURSION
